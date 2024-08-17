@@ -1,4 +1,131 @@
-test 
+#edit layout
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+#from memo_app import app        
 
 
-add new line
+txt_Question = QLineEdit("")
+txt_Answer = QLineEdit("")
+txt_Wrong1 = QLineEdit("")
+txt_Wrong2 = QLineEdit("")
+txt_Wrong3 = QLineEdit("")
+
+layout_form = QFormLayout()
+
+layout_form.addRow("Питання", txt_Question)
+layout_form.addRow("Правильна відповідь:",txt_Answer)
+layout_form.addRow("Неправильний варіант №1:",txt_Wrong1)
+layout_form.addRow("Неправильний варіант №2:",txt_Wrong2)
+layout_form.addRow("Неправильний варіант №3:",txt_Wrong3)
+
+#mein layout
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+
+from memo_edit_layout import layout_form
+from memo_card_layout import layout_card
+
+list_questions = QListView()
+wdgt_edit = QWidget()
+wdgt_edit = setLayout(layout_form)
+btn_add = QPushButton("Нове питання")
+btn_delete = QPushButton("Вадилити питання")
+btn_start = QPushButton("Почати тренування")
+
+main_col1 = QVBoxLayout()
+main_col1.addWidget(list_questions)
+main_col1.addWidget(btn_add)
+
+main_col2 = QVBoxLayout()
+main_col2.addWidget(wdgt_edit)
+main_col2.addWidget(btn_delete)
+
+main_line1 = QHBoxLayout()
+main_line1.addLayout(main_col1)
+main_line1.addLayout(main_col2)
+
+main_line2 = QHBoxLayout()
+main_line2.addStretch(1)
+main_line2.addWidget(btn_start, stretch=2)
+main_line2.addStretch(1)
+
+layout_main = QVBoxLayout()
+layout_main.addLayout(main_line1)
+layout_main.addLayout(main_line2)
+
+#memory card
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+
+width = 600
+height = 600
+
+app = QApplication([])
+win_card  = QWidget()
+win_card.resize(width,height)
+win_card.move(300,300)
+win_card.setWindowTitle("Memory Card")
+
+btn_menu = QPushButton("Меню")
+btn_rest = QPushButton("Відпочити")
+btn_next = QPushButton("Відповісти")
+sp_rest = QSpinBox()
+que = QLabel("питання")
+min = QLabel("хвилин")
+
+RadioGroupBox = QGroupBox("Варіанти відповідей")
+RadioGroup = QButtonGroup()
+
+vid1 = QRadioButton("1")
+vid2 = QRadioButton("2")
+vid3 = QRadioButton("3")
+vid4 = QRadioButton("4")
+
+RadioGroup.addButton(vid1)
+RadioGroup.addButton(vid2)
+RadioGroup.addButton(vid3)
+RadioGroup.addButton(vid4)
+
+layaout_ans = QVBoxLayout()
+layaout_ans1 = QHBoxLayout()
+layaout_ans2 = QHBoxLayout()
+
+layaout_ans1.addWidget(vid1)
+layaout_ans1.addWidget(vid2)
+layaout_ans2.addWidget(vid3)
+layaout_ans2.addWidget(vid4)
+
+layaout_ans.addLayout(layaout_ans1)
+layaout_ans.addLayout(layaout_ans2)
+
+RadioGroupBox.setLayout(layaout_ans)
+
+line_1 = QHBoxLayout()
+
+line_1.addWidget(btn_menu)
+line_1.addStretch(1)
+line_1.addWidget(btn_rest)
+line_1.addWidget(sp_rest)
+line_1.addWidget(min)
+
+line_2 = QHBoxLayout()
+line_2.addWidget(que,alignment=(Qt.AlignHCenter | Qt.AlignVCenter))
+
+line_3 = QHBoxLayout()
+line_3.addStretch(1)
+line_3.addWidget(btn_next)
+line_3.addStretch(1)
+
+main = QVBoxLayout()
+main.addLayout(line_1, stretch=1)
+main.addLayout(line_2,stretch=2)
+main.addWidget(RadioGroupBox)
+main.addLayout(line_3,stretch=3 )
+
+
+win_card.setLayout(main)
+win_card.show()
+app.exec_()
+
+#memore win
+from main_window import *
